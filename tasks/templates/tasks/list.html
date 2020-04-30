@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Record system </title>
+</head>
+<body>
+<h3> Recording app by {{name}} </h3>
+
+
+<form method="POST" action="/">
+    {% csrf_token %}
+    {{form.title}}<input type="submit" name="Create Task" value="ADD New Task">
+
+
+</form>
+
+
+
+{% for task in tasks %}
+<div style="background-color:green;color:pink;padding:20px;">
+
+    {% if task.complete == True%}
+    <p> <strike>{{task}}</strike>
+        {% else %}
+        <span> {{ task }}</span>
+        {% endif %}
+
+    <a href="{% url 'update_task' task.id %}"> <button>Update</button></a>
+        &nbsp
+    <a href="{% url 'delete' task.id %}"><button>Delete</button></a>
+    </p>
+
+</div>
+
+{% endfor %}
+
+
+</body>
+
+
+</html>
